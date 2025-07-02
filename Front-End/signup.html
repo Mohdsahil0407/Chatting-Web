@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sign Up</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <div id="progress-bar"></div>
+  <div class="login-wrapper">
+    <form class="login-box" onsubmit="event.preventDefault(); handleSignup();">
+      <h2>📝 Create Account</h2>
+      <p class="subtitle">Sign up to start chatting</p>
+
+      <input type="text" id="signup-username" placeholder="👤 Username" required />
+      <input type="email" id="signup-email" placeholder="📧 Email" required />
+
+      <!-- Password Field -->
+      <div class="password-container">
+        <input type="password" id="signup-password" placeholder="🔒 Password" required />
+        <i class="fa-solid fa-eye" id="toggle-signup-password" onclick="togglePassword('signup-password', this)"></i>
+      </div>
+
+      <!-- Confirm Password Field -->
+      <div class="password-container">
+        <input type="password" id="signup-confirm" placeholder="🔁 Confirm Password" required />
+        <i class="fa-solid fa-eye" id="toggle-signup-confirm" onclick="togglePassword('signup-confirm', this)"></i>
+      </div>
+
+      <div class="error" id="signup-error"></div>
+
+      <button type="submit">Sign Up</button>
+
+      <p class="signup-text">
+        Already have an account?
+<a href="#" class="signup-link" onclick="startProgressAndNavigate('index.html')">Login here</a>
+      </p>
+    </form>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

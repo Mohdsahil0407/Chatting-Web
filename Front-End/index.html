@@ -1,0 +1,39 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | Chat App</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <div id="progress-bar"></div>
+  <div class="login-wrapper">
+    <form class="login-box" onsubmit="event.preventDefault(); handleLogin();">
+      <h2>🔐 Welcome to ChatApp</h2>
+      <p class="subtitle">Please log in to continue</p>
+      <input type="text" id="login-username" placeholder="👤 Username" required />
+<div class="password-container">
+  <input type="password" id="login-password" placeholder="🔑 Password" required />
+  <i class="fa-solid fa-eye" id="toggle-password" onclick="togglePasswordVisibility()"></i>
+</div>
+
+      <button type="submit">Login</button>
+      <p id="login-error" class="error"></p>
+      <a href="#" class="forgot-link" onclick="forgotPassword()">Forgot your password?</a>
+<p class="signup-text">
+  Don’t have an account?
+  <a href="#" class="signup-link" onclick="startProgressAndNavigate('signup.html')">Sign up</a>
+</p>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+<footer class="footer">
+  <p>© 2025 MyChatApp. Built with ❤️ by Mohammad Sahil</p>
+</footer>
+
+</html>
