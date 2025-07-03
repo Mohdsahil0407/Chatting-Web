@@ -12,6 +12,8 @@ html, body {
   background: linear-gradient(to right, #667eea, #764ba2);
   overflow: hidden;
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
 }
 /* progress bar */
 #progress-bar {
@@ -27,6 +29,7 @@ html, body {
 
 /* Login wrapper fills the screen with no gaps */
 .login-wrapper {
+  flex: 1;
   background: linear-gradient(to right, #667eea, #764ba2);
   height: 100vh;
   max-width: 100vw;
