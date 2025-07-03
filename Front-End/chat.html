@@ -12,7 +12,7 @@
 <div class="chat-container">
 
   <!-- LEFT SIDEBAR -->
-  <aside class="sidebar">
+  <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <i class="fa-solid fa-user-circle"></i>
       <span>You</span>
@@ -29,36 +29,34 @@
   <main class="chat-main">
 
     <!-- HEADER with Global Search -->
-<header class="chat-header">
-  <button id="menu-toggle" class="hamburger">
-    <i class="fa-solid fa-bars"></i>
-  </button>
-  <h2><img src="./assests/logo.png" class="chat-logo" />ChatterWeb</h2>
-  <input type="text" id="global-search" placeholder="Search users..." />
-  <ul id="global-search-results"></ul>
-</header>
+    <header class="chat-header">
+      <button id="menu-toggle" class="hamburger">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <h2><img src="./assests/logo.png" class="chat-logo" />ChatterWeb</h2>
+      <input type="text" id="global-search" placeholder="Search users..." />
+      <ul id="global-search-results"></ul>
+    </header>
+
     <!-- Chat Display -->
     <div class="chat-body" id="chat-body">
       <p class="placeholder">Start chatting with your friend</p>
     </div>
 
-    <!-- Chat Footer -->
-     <div class="chat-footer" id="chat-footer" style="display: none;">
-  <button id="emoji-btn">😊</button>
-  <input type="text" id="message-input" placeholder="Type a message..." />
-  <button onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button>
-</div>
-
+    <!-- ✅ Chat Footer (Only one version) -->
     <div class="chat-footer" id="chat-footer" style="display: none;">
+      <button id="emoji-btn">😊</button>
       <input type="text" id="message-input" placeholder="Type a message..." />
       <button onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button>
     </div>
 
   </main>
-
 </div>
+
+<!-- Overlay for mobile -->
 <div class="overlay" id="overlay"></div>
 
+<!-- JS -->
 <script src="chat.js"></script>
 </body>
 </html>

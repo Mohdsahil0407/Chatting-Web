@@ -77,48 +77,12 @@ function selectFriend(username) {
 function sendMessage() {
   const input = document.getElementById("message-input");
   const message = input.value.trim();
-
   if (!message || !selectedFriend) return;
 
   const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-  // ✅ Create message wrapper
-  const wrapper = document.createElement("div");
-  wrapper.className = "message-wrapper";
-
-  // ✅ Create message bubble
   const msgDiv = document.createElement("div");
   msgDiv.className = "message message-right";
-  msgDiv.innerHTML = `
-    <span class="message-text">${message}</span>
-    <span class="message-time">${time}</span>
-  `;
-
-  // ✅ Create options menu (if needed)
-  const options = document.createElement("div");
-  options.className = "message-options";
-  options.innerHTML = `
-    <i class="fa fa-ellipsis-v options-btn"></i>
-    <div class="options-menu">
-      <div onclick="editMessage(this)">Edit</div>
-      <div onclick="deleteMessage(this)">Delete</div>
-    </div>
-  `;
-
-  wrapper.appendChild(msgDiv);
-  wrapper.appendChild(options);
-  document.getElementById("chat-body").appendChild(wrapper);
-
-  // ✅ Clear input
-  input.value = "";
-
-  // ✅ Refocus input to keep keyboard open
-  input.focus();
-
-  // ✅ Scroll chat to bottom
-  const chatBody = document.getElementById("chat-body");
-  chatBody.scrollTop = chatBody.scrollHeight;
-}
 
   // Add message content
   const msgContent = document.createElement("p");
@@ -148,6 +112,7 @@ function sendMessage() {
   input.value = "";
   document.getElementById("chat-body").scrollTop = document.getElementById("chat-body").scrollHeight;
 }
+ input.focus();
   // Scroll to bottom
   document.getElementById("chat-body").scrollTop = document.getElementById("chat-body").scrollHeight;
 

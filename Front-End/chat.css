@@ -234,6 +234,9 @@ body {
     z-index: 200;
     transition: left 0.3s ease-in-out;
   }
+  .chat-header h2{
+   display: none;
+  }
 
   .sidebar.show {
     left: 0;
