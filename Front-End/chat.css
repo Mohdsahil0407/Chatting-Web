@@ -235,7 +235,7 @@ body {
     transition: left 0.3s ease-in-out;
   }
   .chat-main{
-    overflow-y: hidden;
+    height: auto;
   }
   .chat-header h2{
    display: none;
