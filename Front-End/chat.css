@@ -11,7 +11,7 @@ body {
 
 .chat-container {
   display: flex;
-  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
 }
 
@@ -233,12 +233,6 @@ body {
     background-color: #111;
     z-index: 200;
     transition: left 0.3s ease-in-out;
-  }
-  .chat-main{
-    height: auto;
-  }
-  .chat-header h2{
-   display: none;
   }
 
   .sidebar.show {
