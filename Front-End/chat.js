@@ -75,44 +75,53 @@ function selectFriend(username) {
 }
 // Send message
 function sendMessage() {
-  const input = document.getElementById("message-input");
+  const input = document.getElementById("message-input"); // ✅ Define input
   const message = input.value.trim();
   if (!message || !selectedFriend) return;
 
-  const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const time = new Date().toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit'
+  });
 
-  const msgDiv = document.createElement("div");
-  msgDiv.className = "message message-right";
+  const msgWrapper = document.createElement("div");
+  msgWrapper.className = "message message-right";
 
-  // Add message content
-  const msgContent = document.createElement("p");
-  msgContent.innerHTML = `${message}<span class="msg-time">${time}</span>`;
-
-  // Add action icons (edit/delete)
-  const actions = document.createElement("div");
-  actions.className = "msg-actions";
-  actions.innerHTML = `
-    <i class="fa-solid fa-pen-to-square edit-msg"></i>
-    <i class="fa-solid fa-trash delete-msg"></i>
+  const bubble = document.createElement("div");
+  bubble.className = "msg-bubble";
+  bubble.innerHTML = `
+    <span class="msg-text">${message}</span>
+    <span class="msg-time">${time}</span>
   `;
 
-  msgDiv.appendChild(msgContent);
-  msgDiv.appendChild(actions);
-  document.getElementById("chat-body").appendChild(msgDiv);
+  const dotsMenu = document.createElement("div");
+  dotsMenu.className = "msg-dots";
+  dotsMenu.innerHTML = `
+    <div class="dots-icon">⋮</div>
+    <div class="msg-options">
+      <div class="edit-option">Edit</div>
+      <div class="delete-option">Delete</div>
+    </div>
+  `;
 
-  // Bind edit/delete functions
-  actions.querySelector(".edit-msg").onclick = () => {
+  msgWrapper.appendChild(dotsMenu);
+  msgWrapper.appendChild(bubble);
+  document.getElementById("chat-body").appendChild(msgWrapper);
+
+  // Action buttons
+  dotsMenu.querySelector(".edit-option").onclick = () => {
     input.value = message;
-    msgDiv.remove();
+    msgWrapper.remove();
   };
-  actions.querySelector(".delete-msg").onclick = () => {
-    msgDiv.remove();
+  dotsMenu.querySelector(".delete-option").onclick = () => {
+    msgWrapper.remove();
   };
 
-  input.value = "";
+  input.value = "";        // ✅ Clear input
+  input.focus();           // ✅ Keep keyboard open on mobile
   document.getElementById("chat-body").scrollTop = document.getElementById("chat-body").scrollHeight;
 }
- input.focus();
+
   // Scroll to bottom
   document.getElementById("chat-body").scrollTop = document.getElementById("chat-body").scrollHeight;
 
