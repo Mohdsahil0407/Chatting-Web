@@ -116,6 +116,7 @@ function sendMessage() {
   dropdown.querySelector(".edit-btn").onclick = () => {
     input.value = message;
     wrapper.remove();
+    input.focus(); // focus again if editing
   };
 
   dropdown.querySelector(".delete-btn").onclick = () => wrapper.remove();
@@ -126,11 +127,9 @@ function sendMessage() {
 
   document.getElementById("chat-body").appendChild(wrapper);
   input.value = "";
+  input.focus(); // ✅ keep the keyboard open on mobile
   document.getElementById("chat-body").scrollTop = document.getElementById("chat-body").scrollHeight;
 }
-
-  // Scroll to bottom
-  document.getElementById("chat-body").scrollTop = document.getElementById("chat-body").scrollHeight;
 
   // Simulate reply after 1 sec
   setTimeout(() => {

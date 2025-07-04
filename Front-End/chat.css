@@ -207,7 +207,8 @@ body {
 .message-right {
   background-color: #dcf8c6;
   align-self: flex-end;
-  margin-left: auto;
+  margin-left: 0;
+  /* margin-left: auto; */
 }
 
 .message-left {
