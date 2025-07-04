@@ -1,3 +1,30 @@
+.message-dot {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  font-size: 18px;
+  color: #555;
+  opacity: 0;
+  transition: opacity 0.3s;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.message-wrapper:hover .message-dot {
+  opacity: 1;
+}
+
+.message-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+  padding-right: 30px; /* Ensure space for dot */
+}
+
+/* Existing code preserved below */
+
 * {
   margin: 0;
   padding: 0;
@@ -57,14 +84,13 @@ body {
   padding: 8px;
   border-radius: 6px;
   cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
+  transition: background 0.2s;
   color: white;
   position: relative;
 }
 
 .friend-list li:hover {
   background-color: #222;
-  transform: scale(1.);
 }
 
 .friend-list li img {
@@ -72,18 +98,18 @@ body {
   height: 30px;
   border-radius: 50%;
   margin-right: 10px;
-  transition: transform 0.3s ease;
-}
-.friend-list li .three-dot {
-  display: none;
-  font-size: 18px;
-  color: white;
-  cursor: pointer;
-  margin-left: auto;
 }
 
-.friend-list li:hover .three-dot {
-  display: inline;
+.friend-list li .friend-dot {
+  position: absolute;
+  right: 10px;
+  font-size: 18px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.friend-list li:hover .friend-dot {
+  opacity: 1;
 }
 
 /* Main Chat Area */
@@ -320,43 +346,12 @@ body {
   font-size: 20px;
 }
 
-/* Message wrapper and menu */
-.message-wrapper {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 15px;
-}
-
-.align-right {
-  align-items: flex-end;
-}
-
-.align-left {
-  align-items: flex-start;
-}
-
-.message-dot {
-  position: absolute;
-  top: -8px;
-  left: -28px;
-  font-size: 18px;
-  color: #555;
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out;
-  cursor: pointer;
-}
-
-.message-wrapper:hover .message-dot {
-  opacity: 1;
-}
-
 .message-dropdown {
   position: absolute;
-  top: 18px;
-  left: -28px;
-  background-color: white;
-  border: 1px solid #ccc;
+  top: 28px;
+  right: 0;
+  background: white;
+  border: 3px solid #ccc;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   padding: 5px 0;
   border-radius: 5px;

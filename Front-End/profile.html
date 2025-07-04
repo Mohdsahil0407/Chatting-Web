@@ -2,21 +2,139 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Profile</title>
-  <link rel="stylesheet" href="profile.css" />
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Instagram Style Profile</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .profile-section {
+      max-width: 935px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .profile-top {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #fff;
+    }
+
+    .profile-info {
+      flex-grow: 1;
+    }
+
+    .profile-info h2 {
+      font-size: 28px;
+      margin: 0 0 10px;
+    }
+
+    .edit-button {
+      margin-bottom: 15px;
+      padding: 8px 16px;
+      background-color: #262626;
+      color: white;
+      border: 1px solid #444;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .stats {
+      display: flex;
+      gap: 30px;
+      margin-bottom: 10px;
+    }
+
+    .stats span {
+      font-size: 16px;
+    }
+
+    .bio {
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .bio a {
+      color: #0095f6;
+      text-decoration: none;
+      word-break: break-all;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+      margin-top: 40px;
+    }
+
+    .gallery img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+
+    @media (max-width: 768px) {
+      .profile-top {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="profile-container">
-    <div class="profile-card">
-      <img id="profile-avatar" src="" alt="Avatar" />
-      <h2 id="profile-username"></h2>
-      <p id="profile-bio"></p>
-      <button id="friend-btn">Send Friend Request</button>
+  <div class="profile-section">
+    <div class="profile-top">
+      <img src="https://i.pravatar.cc/150?img=10" alt="Profile" class="profile-pic" />
+      <div class="profile-info">
+        <h2>@sahil.cxr</h2>
+        <button class="edit-button">Edit Profile</button>
+        <div class="stats">
+          <span><strong>5</strong> posts</span>
+          <span><strong>137</strong> followers</span>
+          <span><strong>181</strong> following</span>
+        </div>
+        <p class="bio">
+          Muhammad Sahil<br />
+          Ethical hacker. Real-time chat app builder.<br />
+          <a href="https://portfolio-website-sahil.netlify.app" target="_blank">
+            portfolio-website-sahil.netlify.app
+          </a>
+        </p>
+      </div>
+    </div>
+
+    <div class="gallery">
+      <img src="https://picsum.photos/id/1011/600/600" alt="Post 1">
+      <img src="https://picsum.photos/id/1012/600/600" alt="Post 2">
+      <img src="https://picsum.photos/id/1013/600/600" alt="Post 3">
+      <img src="https://picsum.photos/id/1015/600/600" alt="Post 4">
+      <img src="https://picsum.photos/id/1016/600/600" alt="Post 5">
     </div>
   </div>
-
-  <script src="profile.js"></script>
 </body>
 </html>
