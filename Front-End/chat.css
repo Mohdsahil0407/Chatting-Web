@@ -11,7 +11,8 @@ body {
 
 .chat-container {
   display: flex;
-  height: 100dvh;
+  flex-direction: row;
+  height: 100vh;
   overflow: hidden;
 }
 
@@ -56,12 +57,14 @@ body {
   padding: 8px;
   border-radius: 6px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.2s, transform 0.2s;
   color: white;
+  position: relative;
 }
 
 .friend-list li:hover {
   background-color: #222;
+  transform: scale(1.);
 }
 
 .friend-list li img {
@@ -69,6 +72,18 @@ body {
   height: 30px;
   border-radius: 50%;
   margin-right: 10px;
+  transition: transform 0.3s ease;
+}
+.friend-list li .three-dot {
+  display: none;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.friend-list li:hover .three-dot {
+  display: inline;
 }
 
 /* Main Chat Area */
@@ -76,6 +91,7 @@ body {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  min-height: 0;
   position: relative;
 }
 
@@ -134,9 +150,15 @@ body {
 
 /* Chat body */
 .chat-body {
-  flex-grow: 1;
+  flex: 1;
+  min-height: 0;
   padding: 20px;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scroll-behavior: smooth;
+  background-color: #f4f6f8;
 }
 
 .placeholder {
@@ -147,12 +169,13 @@ body {
 
 .message {
   max-width: 60%;
-  width:fit-content;
+  width: fit-content;
   margin-bottom: 10px;
   padding: 10px 15px;
   border-radius: 15px;
   position: relative;
   word-break: break-word;
+  transition: all 0.3s ease;
 }
 
 .message-right {
@@ -166,6 +189,11 @@ body {
   border: 1px solid #ccc;
   align-self: flex-start;
   margin-right: auto;
+}
+
+.message:hover {
+  transform: scale(1.02);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .msg-time {
@@ -184,7 +212,6 @@ body {
   border-top: 1px solid #ddd;
 }
 
-
 .chat-footer input {
   flex-grow: 1;
   padding: 10px;
@@ -192,6 +219,7 @@ body {
   border: 1px solid #ccc;
   margin-right: 10px;
 }
+
 .chat-footer button#emoji-btn {
   background: none;
   border: none;
@@ -199,6 +227,7 @@ body {
   cursor: pointer;
   margin-right: 8px;
 }
+
 .chat-footer button {
   background: #007bff;
   color: white;
@@ -212,6 +241,7 @@ body {
 .chat-footer button:hover {
   background: #0056b3;
 }
+
 /* Hamburger button */
 .hamburger {
   display: none;
@@ -234,6 +264,7 @@ body {
     z-index: 200;
     transition: left 0.3s ease-in-out;
   }
+
   .sidebar.show {
     left: 0;
   }
@@ -254,6 +285,7 @@ body {
     width: 180px;
   }
 }
+
 .overlay {
   display: none;
   position: fixed;
@@ -269,7 +301,8 @@ body {
 .overlay.show {
   display: block;
 }
-/* add emoji */
+
+/* Emoji menu */
 .emoji-menu {
   display: flex;
   gap: 5px;
@@ -281,26 +314,66 @@ body {
   position: absolute;
   z-index: 999;
 }
+
 .emoji-menu span {
   cursor: pointer;
   font-size: 20px;
 }
-/* message action */
-.msg-actions {
+
+/* Message wrapper and menu */
+.message-wrapper {
+  position: relative;
   display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-  font-size: 14px;
-  margin-top: 5px;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.align-right {
+  align-items: flex-end;
+}
+
+.align-left {
+  align-items: flex-start;
+}
+
+.message-dot {
+  position: absolute;
+  top: -8px;
+  left: -28px;
+  font-size: 18px;
   color: #555;
-}
-
-.msg-actions i {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
   cursor: pointer;
-  transition: color 0.2s;
 }
 
-.msg-actions i:hover {
-  color: red;
+.message-wrapper:hover .message-dot {
+  opacity: 1;
 }
 
+.message-dropdown {
+  position: absolute;
+  top: 18px;
+  left: -28px;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  padding: 5px 0;
+  border-radius: 5px;
+  display: none;
+  z-index: 100;
+}
+
+.message-dropdown button {
+  display: block;
+  padding: 8px 12px;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+.message-dropdown button:hover {
+  background-color: #f0f0f0;
+}

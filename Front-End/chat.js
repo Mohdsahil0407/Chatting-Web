@@ -75,50 +75,57 @@ function selectFriend(username) {
 }
 // Send message
 function sendMessage() {
-  const input = document.getElementById("message-input"); // ✅ Define input
+  const input = document.getElementById("message-input");
   const message = input.value.trim();
   if (!message || !selectedFriend) return;
 
-  const time = new Date().toLocaleTimeString([], {
-    hour: '2-digit',
-    minute: '2-digit'
-  });
+  const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-  const msgWrapper = document.createElement("div");
-  msgWrapper.className = "message message-right";
+  // Create wrapper
+  const wrapper = document.createElement("div");
+  wrapper.className = "message-wrapper align-right";
 
-  const bubble = document.createElement("div");
-  bubble.className = "msg-bubble";
-  bubble.innerHTML = `
-    <span class="msg-text">${message}</span>
-    <span class="msg-time">${time}</span>
+  // Create 3-dot menu
+  const dot = document.createElement("span");
+  dot.className = "message-dot";
+  dot.textContent = "⋮";
+
+  // Dropdown menu
+  const dropdown = document.createElement("div");
+  dropdown.className = "message-dropdown";
+  dropdown.innerHTML = `
+    <button class="edit-btn">Edit</button>
+    <button class="delete-btn">Delete</button>
   `;
 
-  const dotsMenu = document.createElement("div");
-  dotsMenu.className = "msg-dots";
-  dotsMenu.innerHTML = `
-    <div class="dots-icon">⋮</div>
-    <div class="msg-options">
-      <div class="edit-option">Edit</div>
-      <div class="delete-option">Delete</div>
-    </div>
-  `;
+  // Toggle dropdown
+  dot.onclick = (e) => {
+    e.stopPropagation(); // Prevent outside click
+    dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+  };
 
-  msgWrapper.appendChild(dotsMenu);
-  msgWrapper.appendChild(bubble);
-  document.getElementById("chat-body").appendChild(msgWrapper);
+  // Hide dropdown when clicking outside
+  document.addEventListener("click", () => dropdown.style.display = "none");
 
-  // Action buttons
-  dotsMenu.querySelector(".edit-option").onclick = () => {
+  // Create message bubble
+  const msgDiv = document.createElement("div");
+  msgDiv.className = "message message-right";
+  msgDiv.innerHTML = `<p>${message}<span class="msg-time">${time}</span></p>`;
+
+  // Handle Edit/Delete
+  dropdown.querySelector(".edit-btn").onclick = () => {
     input.value = message;
-    msgWrapper.remove();
-  };
-  dotsMenu.querySelector(".delete-option").onclick = () => {
-    msgWrapper.remove();
+    wrapper.remove();
   };
 
-  input.value = "";        // ✅ Clear input
-  input.focus();           // ✅ Keep keyboard open on mobile
+  dropdown.querySelector(".delete-btn").onclick = () => wrapper.remove();
+
+  wrapper.appendChild(dot);
+  wrapper.appendChild(dropdown);
+  wrapper.appendChild(msgDiv);
+
+  document.getElementById("chat-body").appendChild(wrapper);
+  input.value = "";
   document.getElementById("chat-body").scrollTop = document.getElementById("chat-body").scrollHeight;
 }
 
@@ -214,4 +221,19 @@ document.addEventListener("click", () => {
     emojiMenu = null;
   }
 });
+document.addEventListener("click", function (e) {
+  // If clicked on 3-dot icon
+  if (e.target.classList.contains("message-dot")) {
+    const allDropdowns = document.querySelectorAll(".message-dropdown");
+    allDropdowns.forEach(d => d.style.display = "none"); // Close others
 
+    const dropdown = e.target.nextElementSibling;
+    dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+  } 
+  // If clicked outside any dropdown
+  else if (!e.target.closest(".message-dropdown")) {
+    document.querySelectorAll(".message-dropdown").forEach(drop => {
+      drop.style.display = "none";
+    });
+  }
+});
