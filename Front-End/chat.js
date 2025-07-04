@@ -1,3 +1,11 @@
+//view height adjustment
+function setViewportHeight() {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh * 100}px`);
+}
+setViewportHeight();
+window.addEventListener('resize', setViewportHeight);
+
 // Dummy friend data (you will fetch this from backend later)
 const myFriends = [
   { username: "Alice", avatar: "https://i.pravatar.cc/150?img=1" },
@@ -130,7 +138,10 @@ function sendMessage() {
   input.focus(); // ✅ keep the keyboard open on mobile
  setTimeout(() => {
   const chatBody = document.getElementById("chat-body");
+  setTimeout(() => {
   chatBody.scrollTop = chatBody.scrollHeight;
+}, 300);
+
 }, 100); // wait 100ms to let layout settle
 
 }

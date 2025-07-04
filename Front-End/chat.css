@@ -1,3 +1,10 @@
+html, body {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: manipulation;
+}
+
 .message-dot {
   position: absolute;
   top: 12px;
@@ -193,6 +200,7 @@ body {
   gap: 10px;
   scroll-behavior: smooth;
   background-color: #f4f6f8;
+  -webkit-overflow-scrolling: touch;
 }
 
 .placeholder {
