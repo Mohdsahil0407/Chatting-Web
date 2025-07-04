@@ -128,7 +128,11 @@ function sendMessage() {
   document.getElementById("chat-body").appendChild(wrapper);
   input.value = "";
   input.focus(); // ✅ keep the keyboard open on mobile
-  document.getElementById("chat-body").scrollTop = document.getElementById("chat-body").scrollHeight;
+ setTimeout(() => {
+  const chatBody = document.getElementById("chat-body");
+  chatBody.scrollTop = chatBody.scrollHeight;
+}, 100); // wait 100ms to let layout settle
+
 }
 
   // Simulate reply after 1 sec
