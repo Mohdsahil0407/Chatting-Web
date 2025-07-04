@@ -5,6 +5,17 @@ body {
   margin: 0;
   padding: 20px;
 }
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+  z-index: 10;
+}
 
 .profile-section {
   max-width: 900px;
@@ -86,8 +97,8 @@ body {
   }
 
   .profile-pic {
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height:50px;
   }
 
   .profile-info h2 {
@@ -98,3 +109,103 @@ body {
     justify-content: center;
   }
 }
+body{
+
+      background-color: #000;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .profile-section {
+      max-width: 935px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .profile-top {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #fff;
+    }
+
+    .profile-info {
+      flex-grow: 1;
+    }
+
+    .profile-info h2 {
+      font-size: 28px;
+      margin: 0 0 10px;
+    }
+
+    .edit-button {
+      margin-bottom: 15px;
+      padding: 8px 16px;
+      background-color: #262626;
+      color: white;
+      border: 1px solid #444;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .stats {
+      display: flex;
+      gap: 30px;
+      margin-bottom: 10px;
+    }
+
+    .stats span {
+      font-size: 16px;
+    }
+
+    .bio {
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .bio a {
+      color: #0095f6;
+      text-decoration: none;
+      word-break: break-all;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+      margin-top: 40px;
+    }
+
+    .gallery img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+
+    @media (max-width: 768px) {
+      .profile-top {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gallery {
+        grid-template-columns: repeat(2,1fr);
+      }
+    }

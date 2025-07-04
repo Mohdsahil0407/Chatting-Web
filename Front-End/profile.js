@@ -1,3 +1,8 @@
+//Go back function
+function goBack() {
+  window.history.back(); // ⬅ Go to previous page
+}
+
 // Simulated data source (replace this with backend later)
 const users = [
   {
@@ -37,7 +42,7 @@ if (user) {
     friendBtn.onclick = () => {
       friendBtn.disabled = true;
       friendBtn.textContent = "Request Sent";
-      // ✅ Later: call /api/friend-request
+      // Later: call /api/friend-request
     };
   }
 } else {

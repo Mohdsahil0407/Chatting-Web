@@ -4,110 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Responsive Instagram Style Profile</title>
-  <style>
-    body {
-      background-color: #000;
-      color: #fff;
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-
-    .profile-section {
-      max-width: 935px;
-      margin: 0 auto;
-      padding: 40px 20px;
-    }
-
-    .profile-top {
-      display: flex;
-      align-items: center;
-      gap: 40px;
-      flex-wrap: wrap;
-    }
-
-    .profile-pic {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid #fff;
-    }
-
-    .profile-info {
-      flex-grow: 1;
-    }
-
-    .profile-info h2 {
-      font-size: 28px;
-      margin: 0 0 10px;
-    }
-
-    .edit-button {
-      margin-bottom: 15px;
-      padding: 8px 16px;
-      background-color: #262626;
-      color: white;
-      border: 1px solid #444;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .stats {
-      display: flex;
-      gap: 30px;
-      margin-bottom: 10px;
-    }
-
-    .stats span {
-      font-size: 16px;
-    }
-
-    .bio {
-      font-size: 15px;
-      line-height: 1.6;
-    }
-
-    .bio a {
-      color: #0095f6;
-      text-decoration: none;
-      word-break: break-all;
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 5px;
-      margin-top: 40px;
-    }
-
-    .gallery img {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-    }
-
-    @media (max-width: 768px) {
-      .profile-top {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
-
-      .gallery {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 480px) {
-      .gallery {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+<link rel="stylesheet" href="profile.css">
 </head>
 <body>
   <div class="profile-section">
+    <div class="backbtn">
+    <button class="back-button" onclick="goBack()">←</button>
+    </div>
     <div class="profile-top">
       <img src="https://i.pravatar.cc/150?img=10" alt="Profile" class="profile-pic" />
       <div class="profile-info">
@@ -137,5 +40,6 @@
       <img src="https://mediaservice.audi.com/media/fast/v3_x2SXWhbdRjG__3VrjU5SXZSm_aksUdycuIXsSdZ2maOqNGBKBuEtSoypf7b_JOcmq-enHSB7UIQ9Uq9c-qFE0EvdBtOb4Yfk1FvZGwX6oUXKn4hCnMMhqKg4ql3Ly_P83tfeJ6Tv4mxgSc4fO_Ja9N_7ppY-Q4hhj0hRk0x5g-8te6IEKJKyG3Lhprf6KnG9O3K97qdnBr6ObnVmy84hcXc_6v7V3LVSq7y0EJ-mCs-mM_JVismxgO_GBVi_Ckhxl7foYno5MBr9aQn23d4qt_rdvrultJvcaQqKacol9Zqau-epUKhtJQvFooLtVIt7-Tzdbm4UF-oFZ14gDguRgO6uKHTWF-vB6f9PcWa6j_pd3vDlthVL_W8Uk1ct_MaN-3jxvdJLJM4Q-IsRgTjX5JvkzyL-Q7mh5gXMD8nfYn0H1gjWGGs_ViPYl0lmyF7N9kh4h60Z9BOEAszc4bZn0ltkHqM1POkjmBfQxTRPyE-ydSrJOZJbpC5jcy32FPYj2C_S2iM0JtoObS7iPhEA_1B4hvEP2DqS4w2xgWMq1gTZGJk1sicIHMKex_hBwj_TuItIp-ha-iPoyv0beKbGD7GNqlDzH3D3F_M_Y05gbkb0yJ9Bes41jGsc1jbZH7FjmPfjF3F_oHIy0S-JtZl93skjzIzIPkRsa-YPMdUk8RzJM4zfYWZpzGPYR_G3sS-iBjn-h8JHSDUI7xIWBI-yq0voGlop4k8QeRFIl8QjRKrED-I8RrJ75ndJHWKuY8x7yT9D1YavYKxgvEsKQ3rF7RZopeJXUYfQX8F_Q30n0h8GqT8kupsuUG6bdXxy_cFPfFlx3fl6nJ34Dcrdc9dl9kjbs1vlvN7C062qdxG0y_ni0UnK1u9pizXZauvsuuyrTxZXvaDCq9WVgurjhMIOkGlfTeAlqvdvrszHdixZ_u-Up7bachOo6XKeSfbVr6sSV9uKa8fqMqFydHKw9X_AGHJw8E6AwAA.webp?wid=591" alt="Post 6">
     </div>
   </div>
+  <script src="profile.js"></script>
 </body>
 </html>
