@@ -36,12 +36,20 @@ body {
   background-color: #f0f2f5;
 }
 
-.chat-container {
+/* .chat-container {
   display: flex;
   flex-direction: row;
   height: 100vh;
   overflow: hidden;
+} */
+ .chat-container {
+  display: flex;
+  flex-direction: row;
+  height: 100dvh; /* fallback */
+  height: var(--vh, 100vh); /* dynamic height will be applied by JS */
+  overflow: hidden;
 }
+
 
 /* Sidebar */
 .sidebar {

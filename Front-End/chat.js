@@ -236,3 +236,11 @@ document.addEventListener("click", function (e) {
     });
   }
 });
+//dinemicaly adjust chatbox height
+// ✅ Fix 100vh issue on mobile
+function setViewportHeight() {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh * 100}px`);
+}
+setViewportHeight();
+window.addEventListener('resize', setViewportHeight);
