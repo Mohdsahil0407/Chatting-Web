@@ -9,16 +9,12 @@ window.addEventListener('orientationchange', setViewportHeight);
 document.addEventListener('DOMContentLoaded', setViewportHeight);
 setInterval(setViewportHeight, 1000); // extra safety
 
-// ✅ Scroll to bottom function
+// ✅ Scroll to bottom
 function scrollToBottom() {
   const chatBody = document.getElementById("chat-body");
   requestAnimationFrame(() => {
     chatBody.scrollTop = chatBody.scrollHeight;
   });
-  // fallback scroll after layout settles
-  setTimeout(() => {
-    chatBody.scrollTop = chatBody.scrollHeight;
-  }, 100);
 }
 
 // Dummy friend data
@@ -28,6 +24,7 @@ const myFriends = [
   { username: "Charlie", avatar: "https://i.pravatar.cc/150?img=3" }
 ];
 
+// Dummy all users (for global search)
 const allUsers = [
   ...myFriends,
   { username: "Sahil", avatar: "https://i.pravatar.cc/150?img=4" },
@@ -49,14 +46,14 @@ function renderFriends(list = myFriends) {
 }
 renderFriends();
 
-// Friend search (sidebar)
+// Sidebar friend search
 document.getElementById("friend-search").addEventListener("input", e => {
   const q = e.target.value.toLowerCase();
   const filtered = myFriends.filter(f => f.username.toLowerCase().includes(q));
   renderFriends(filtered);
 });
 
-// Global search
+// Global user search
 document.getElementById("global-search").addEventListener("input", e => {
   const q = e.target.value.toLowerCase();
   const resultBox = document.getElementById("global-search-results");
@@ -65,8 +62,7 @@ document.getElementById("global-search").addEventListener("input", e => {
   if (!q) return;
 
   const results = allUsers.filter(
-    u => u.username.toLowerCase().includes(q) &&
-    !myFriends.some(f => f.username === u.username)
+    u => u.username.toLowerCase().includes(q) && !myFriends.some(f => f.username === u.username)
   );
 
   results.forEach(user => {
@@ -79,7 +75,7 @@ document.getElementById("global-search").addEventListener("input", e => {
   });
 });
 
-// Select friend to chat
+// Select a friend to start chat
 function selectFriend(username) {
   selectedFriend = username;
   document.getElementById("chat-body").innerHTML = "";
@@ -135,7 +131,6 @@ function sendMessage() {
     wrapper.remove();
     input.focus();
   };
-
   dropdown.querySelector(".delete-btn").onclick = () => wrapper.remove();
 
   wrapper.appendChild(dot);
@@ -147,7 +142,7 @@ function sendMessage() {
   input.value = "";
   input.focus();
 
-  scrollToBottom();
+  scrollToBottom(); // ✅ Scroll after sending
 
   // Simulate reply
   setTimeout(() => {
@@ -155,11 +150,11 @@ function sendMessage() {
     reply.className = "message message-left";
     reply.innerHTML = `<p>Reply from ${selectedFriend}<span class="msg-time">${time}</span></p>`;
     chatBody.appendChild(reply);
-    scrollToBottom();
+    scrollToBottom(); // ✅ Scroll after receiving
   }, 1000);
 }
 
-// Hamburger Menu
+// Hamburger menu
 const sidebar = document.querySelector(".sidebar");
 const overlay = document.getElementById("overlay");
 const toggleBtn = document.getElementById("menu-toggle");
@@ -184,7 +179,7 @@ document.addEventListener("click", function (e) {
   }
 });
 
-// Enter to send, Shift+Enter for newline
+// Enter = Send, Shift+Enter = New line
 document.getElementById("message-input").addEventListener("keydown", function (e) {
   if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();
@@ -219,12 +214,9 @@ document.getElementById("emoji-btn").addEventListener("click", (e) => {
 
   document.body.appendChild(emojiMenu);
   const rect = e.target.getBoundingClientRect();
-
-  const maxRight = window.innerWidth - emojiMenu.offsetWidth - 10;
-  const left = Math.min(rect.left, maxRight);
   emojiMenu.style.position = "absolute";
   emojiMenu.style.top = `${rect.top - 50}px`;
-  emojiMenu.style.left = `${left}px`;
+  emojiMenu.style.left = `${rect.left}px`;
 });
 document.addEventListener("click", () => {
   if (emojiMenu) {
@@ -233,7 +225,7 @@ document.addEventListener("click", () => {
   }
 });
 
-// Dropdown toggler
+// Dropdown menu toggle
 document.addEventListener("click", function (e) {
   if (e.target.classList.contains("message-dot")) {
     document.querySelectorAll(".message-dropdown").forEach(d => d.style.display = "none");
