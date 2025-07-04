@@ -1,12 +1,23 @@
-//view height adjustment
+// ✅ View height adjustment
 function setViewportHeight() {
   const vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty('--vh', `${vh * 100}px`);
 }
 setViewportHeight();
 window.addEventListener('resize', setViewportHeight);
+window.addEventListener('orientationchange', setViewportHeight);
+document.addEventListener('DOMContentLoaded', setViewportHeight);
+setInterval(setViewportHeight, 1000); // extra safety
 
-// Dummy friend data (you will fetch this from backend later)
+// ✅ Scroll to bottom
+function scrollToBottom() {
+  const chatBody = document.getElementById("chat-body");
+  requestAnimationFrame(() => {
+    chatBody.scrollTop = chatBody.scrollHeight;
+  });
+}
+
+// Dummy friend data
 const myFriends = [
   { username: "Alice", avatar: "https://i.pravatar.cc/150?img=1" },
   { username: "Bob", avatar: "https://i.pravatar.cc/150?img=2" },
@@ -75,12 +86,14 @@ function selectFriend(username) {
   msg.textContent = `Chatting with ${username}`;
   document.getElementById("chat-body").appendChild(msg);
 
-  // ✅ Auto-close sidebar & overlay on mobile
   if (window.innerWidth <= 768) {
     document.querySelector(".sidebar").classList.remove("show");
     document.getElementById("overlay").classList.remove("show");
   }
+
+  scrollToBottom();
 }
+
 // Send message
 function sendMessage() {
   const input = document.getElementById("message-input");
@@ -89,16 +102,13 @@ function sendMessage() {
 
   const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-  // Create wrapper
   const wrapper = document.createElement("div");
   wrapper.className = "message-wrapper align-right";
 
-  // Create 3-dot menu
   const dot = document.createElement("span");
   dot.className = "message-dot";
   dot.textContent = "⋮";
 
-  // Dropdown menu
   const dropdown = document.createElement("div");
   dropdown.className = "message-dropdown";
   dropdown.innerHTML = `
@@ -106,72 +116,57 @@ function sendMessage() {
     <button class="delete-btn">Delete</button>
   `;
 
-  // Toggle dropdown
   dot.onclick = (e) => {
-    e.stopPropagation(); // Prevent outside click
+    e.stopPropagation();
     dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
   };
-
-  // Hide dropdown when clicking outside
   document.addEventListener("click", () => dropdown.style.display = "none");
 
-  // Create message bubble
   const msgDiv = document.createElement("div");
   msgDiv.className = "message message-right";
   msgDiv.innerHTML = `<p>${message}<span class="msg-time">${time}</span></p>`;
 
-  // Handle Edit/Delete
   dropdown.querySelector(".edit-btn").onclick = () => {
     input.value = message;
     wrapper.remove();
-    input.focus(); // focus again if editing
+    input.focus();
   };
-
   dropdown.querySelector(".delete-btn").onclick = () => wrapper.remove();
 
   wrapper.appendChild(dot);
   wrapper.appendChild(dropdown);
   wrapper.appendChild(msgDiv);
 
-  document.getElementById("chat-body").appendChild(wrapper);
-  input.value = "";
-  input.focus(); // ✅ keep the keyboard open on mobile
- setTimeout(() => {
   const chatBody = document.getElementById("chat-body");
-  setTimeout(() => {
-  chatBody.scrollTop = chatBody.scrollHeight;
-}, 300);
+  chatBody.appendChild(wrapper);
+  input.value = "";
+  input.focus();
 
-}, 100); // wait 100ms to let layout settle
+  scrollToBottom(); // ✅ Scroll after sending
 
-}
-
-  // Simulate reply after 1 sec
+  // Simulate reply
   setTimeout(() => {
     const reply = document.createElement("div");
     reply.className = "message message-left";
     reply.innerHTML = `<p>Reply from ${selectedFriend}<span class="msg-time">${time}</span></p>`;
-    document.getElementById("chat-body").appendChild(reply);
+    chatBody.appendChild(reply);
+    scrollToBottom(); // ✅ Scroll after receiving
   }, 1000);
+}
 
-//humberger
+// Hamburger menu
 const sidebar = document.querySelector(".sidebar");
 const overlay = document.getElementById("overlay");
 const toggleBtn = document.getElementById("menu-toggle");
 
-// Open sidebar
 toggleBtn.addEventListener("click", () => {
   sidebar.classList.toggle("show");
   overlay.classList.toggle("show");
 });
-
-// Close on overlay click
 overlay.addEventListener("click", () => {
   sidebar.classList.remove("show");
   overlay.classList.remove("show");
 });
-
-// Also close when clicking outside (optional extra safety)
 document.addEventListener("click", function (e) {
   if (
     window.innerWidth <= 768 &&
@@ -183,27 +178,26 @@ document.addEventListener("click", function (e) {
     overlay.classList.remove("show");
   }
 });
-// To Add Enter and Shift 
+
+// Enter = Send, Shift+Enter = New line
 document.getElementById("message-input").addEventListener("keydown", function (e) {
   if (e.key === "Enter" && !e.shiftKey) {
-    e.preventDefault(); // prevent line break
-    sendMessage();      // call the function to send message
+    e.preventDefault();
+    sendMessage();
   }
 });
-//add emoji
+
+// Emoji Picker
 let emojiMenu;
-
 document.getElementById("emoji-btn").addEventListener("click", (e) => {
-  e.stopPropagation(); // stop it from closing instantly
+  e.stopPropagation();
 
-  // Toggle off if already open
   if (emojiMenu) {
     emojiMenu.remove();
     emojiMenu = null;
     return;
   }
 
-  // Create emoji menu
   emojiMenu = document.createElement("div");
   emojiMenu.className = "emoji-menu";
 
@@ -212,11 +206,8 @@ document.getElementById("emoji-btn").addEventListener("click", (e) => {
     const span = document.createElement("span");
     span.textContent = emoji;
     span.onclick = (event) => {
-      event.stopPropagation(); // don't let it close
+      event.stopPropagation();
       document.getElementById("message-input").value += emoji;
-      // ❌ REMOVE this line (no auto-close now)
-      // emojiMenu.remove();
-      // emojiMenu = null;
     };
     emojiMenu.appendChild(span);
   });
@@ -224,38 +215,25 @@ document.getElementById("emoji-btn").addEventListener("click", (e) => {
   document.body.appendChild(emojiMenu);
   const rect = e.target.getBoundingClientRect();
   emojiMenu.style.position = "absolute";
-  emojiMenu.style.top = `${rect.top - 50}px`; // above
+  emojiMenu.style.top = `${rect.top - 50}px`;
   emojiMenu.style.left = `${rect.left}px`;
 });
-
-//Close only when clicking outside
 document.addEventListener("click", () => {
   if (emojiMenu) {
     emojiMenu.remove();
     emojiMenu = null;
   }
 });
-document.addEventListener("click", function (e) {
-  // If clicked on 3-dot icon
-  if (e.target.classList.contains("message-dot")) {
-    const allDropdowns = document.querySelectorAll(".message-dropdown");
-    allDropdowns.forEach(d => d.style.display = "none"); // Close others
 
+// Dropdown menu toggle
+document.addEventListener("click", function (e) {
+  if (e.target.classList.contains("message-dot")) {
+    document.querySelectorAll(".message-dropdown").forEach(d => d.style.display = "none");
     const dropdown = e.target.nextElementSibling;
     dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
-  } 
-  // If clicked outside any dropdown
-  else if (!e.target.closest(".message-dropdown")) {
+  } else if (!e.target.closest(".message-dropdown")) {
     document.querySelectorAll(".message-dropdown").forEach(drop => {
       drop.style.display = "none";
     });
   }
 });
-//dinemicaly adjust chatbox height
-// ✅ Fix 100vh issue on mobile
-function setViewportHeight() {
-  const vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh * 100}px`);
-}
-setViewportHeight();
-window.addEventListener('resize', setViewportHeight);
