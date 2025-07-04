@@ -188,6 +188,7 @@ body {
   flex: 1;
   min-height: 0;
   padding: 20px;
+  padding-bottom: 80px; /* ✅ Makes space for the fixed chat-footer */
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -196,6 +197,7 @@ body {
   background-color: #f4f6f8;
   -webkit-overflow-scrolling: touch;
 }
+
 
 .placeholder {
   color: #888;
@@ -243,12 +245,16 @@ body {
 
 /* Footer */
 .chat-footer {
+  position: fixed;              /* 🔒 Locks the footer in place */
+  bottom: 0;                    /* 📍 Stick to the bottom */
+  left: 0;
+  right: 0;
+  z-index: 10;                  /* Ensure it stays above */
+  background-color: #fff;
   display: flex;
   padding: 10px 20px;
-  background-color: #fff;
   border-top: 1px solid #ddd;
 }
-
 .chat-footer input {
   flex-grow: 1;
   padding: 10px;
