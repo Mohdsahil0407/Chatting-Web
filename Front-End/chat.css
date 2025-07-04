@@ -190,7 +190,7 @@ body {
 .placeholder {
   color: #888;
   text-align: center;
-  margin-top: 50px;
+
 }
 
 .message {
@@ -277,9 +277,16 @@ body {
   margin-right: 10px;
   cursor: pointer;
 }
-
+.chat-header2{
+  display: flex;
+}
 /* Responsive for mobile */
 @media (max-width: 768px) {
+.chat-header2 h2{
+  display: none;
+
+}
+
   .sidebar {
     position: fixed;
     top: 0;
@@ -308,7 +315,7 @@ body {
   }
 
   #global-search {
-    width: 180px;
+    width: 280px;
   }
 }
 
@@ -372,3 +379,4 @@ body {
 .message-dropdown button:hover {
   background-color: #f0f0f0;
 }
+
