@@ -245,11 +245,11 @@ body {
 
 /* Footer */
 .chat-footer {
-  position: fixed;              /* 🔒 Locks the footer in place */
+  /* position: fixed;   */
   bottom: 0;                    /* 📍 Stick to the bottom */
   left: 0;
   right: 0;
-  z-index: 10;                  /* Ensure it stays above */
+  z-index: 10;     
   background-color: #fff;
   display: flex;
   padding: 10px 20px;
@@ -303,7 +303,9 @@ body {
   display: none;
 
 }
-
+#emoji-btn{
+  display: none;
+}
   .sidebar {
     position: fixed;
     top: 0;
