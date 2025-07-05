@@ -7,6 +7,12 @@ setViewportHeight();
 window.addEventListener('resize', setViewportHeight);
 window.addEventListener('orientationchange', setViewportHeight);
 document.addEventListener('DOMContentLoaded', setViewportHeight);
+setInterval(setViewportHeight, 1000);
+
+setViewportHeight();
+window.addEventListener('resize', setViewportHeight);
+window.addEventListener('orientationchange', setViewportHeight);
+document.addEventListener('DOMContentLoaded', setViewportHeight);
 setInterval(setViewportHeight, 1000); // extra safety
 
 // ✅ Scroll to bottom
@@ -16,6 +22,12 @@ function scrollToBottom() {
     chatBody.scrollTop = chatBody.scrollHeight;
   });
 }
+
+// ✅ Scroll to bottom on input focus (mobile fix)
+const input = document.getElementById("message-input");
+input.addEventListener("focus", () => {
+  setTimeout(scrollToBottom, 300);
+});
 
 // Dummy friend data
 const myFriends = [

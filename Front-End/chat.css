@@ -1,10 +1,9 @@
 html, body {
   height: 100%;
-  overflow: hidden;
+  overflow: auto; /* ✅ allow scrolling */
   overscroll-behavior: none;
   touch-action: manipulation;
 }
-
 .message-dot {
   position: absolute;
   top: 15px;
@@ -188,7 +187,7 @@ body {
   flex: 1;
   min-height: 0;
   padding: 20px;
-  padding-bottom: 80px; /* ✅ Makes space for the fixed chat-footer */
+  padding-bottom: 120px; /* ✅ bigger space for keyboard overlay */
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -245,7 +244,7 @@ body {
 
 /* Footer */
 .chat-footer {
-  /* position: fixed;   */
+  position: fixed;  
   bottom: 0;                    /* 📍 Stick to the bottom */
   left: 0;
   right: 0;
